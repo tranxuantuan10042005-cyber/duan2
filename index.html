@@ -115,7 +115,7 @@
             </div>
             <!-- popular right -->
             <div class="control">
-              <button class="control-btn">
+              <button class="control-btn prev">
                 <svg
                   width="7"
                   height="13"
@@ -131,7 +131,7 @@
                   />
                 </svg>
               </button>
-              <button class="control-btn">
+              <button class="control-btn next">
                 <svg
                   width="7"
                   height="13"
@@ -149,7 +149,7 @@
               </button>
             </div>
           </div>
-          <div class="'course-wrapper">
+          <div class="course-wrapper">
             <div class="course-list">
               <!-- item1 -->
               <div class="course-item">
@@ -750,5 +750,54 @@
         </div>
       </div>
     </footer>
+    <script>
+      // 1. Truy cập các phần tử
+      const courseList = document.querySelector(".course-list");
+      const nextBtn = document.querySelector(".next");
+      const prevBtn = document.querySelector(".prev");
+      const items = document.querySelectorAll(".course-item");
+
+      let index = 0;
+
+      // 2. Hàm tính toán và thực hiện trượt
+      function slide() {
+        if (items.length === 0) return;
+
+        // Lấy chiều rộng thực tế của 1 item và khoảng cách gap (30px)
+        const itemWidth = items[0].offsetWidth;
+        const gap = 30;
+
+        // Tính toán khoảng cách cần dịch chuyển
+        const moveDistance = (itemWidth + gap) * index;
+
+        // Thực hiện hiệu ứng dịch chuyển
+        courseList.style.transform = `translateX(-${moveDistance}px)`;
+      }
+
+      // 3. Sự kiện khi nhấn nút Next
+      nextBtn.onclick = () => {
+        // Chỉ cho phép trượt nếu chưa đến item cuối cùng (hiển thị 3 item 1 lúc)
+        if (index < items.length - 3) {
+          index++;
+          slide();
+        } else {
+          // Hiệu ứng rung nhẹ nếu muốn báo hiệu đã hết ảnh (tùy chọn)
+          console.log("Đã đến khóa học cuối cùng");
+        }
+      };
+
+      // 4. Sự kiện khi nhấn nút Prev
+      prevBtn.onclick = () => {
+        if (index > 0) {
+          index--;
+          slide();
+        }
+      };
+
+      // 5. Lắng nghe sự kiện thay đổi kích thước màn hình để tính lại vị trí
+      window.onresize = () => {
+        slide();
+      };
+    </script>
   </body>
 </html>

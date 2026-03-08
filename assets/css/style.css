@@ -278,16 +278,21 @@ a {
   cursor: pointer;
 }
 /* ------------course---------- */
+.course-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
 .popular .course-list {
   display: flex;
   gap: 30px;
-  margin-top: 55px;
-  overflow: hidden;
+  width: max-content;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
 }
 .popular .course-item {
   flex-shrink: 0;
-  width: calc(33.33% - 20px);
-  max-width: calc(33.33% - 20px);
+  width: 370px;
   border-radius: 12px;
   border: 1px solid #e2dfda;
   background: #fff;
